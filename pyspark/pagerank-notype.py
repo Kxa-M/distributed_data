@@ -30,6 +30,8 @@ from typing import Iterable, Tuple
 from pyspark.resultiterable import ResultIterable
 from pyspark.sql import SparkSession
 
+import os
+
 
 # removed typing for compatibility with Spark 3.1.3
 # typing ok with spark 3.3.0
@@ -99,8 +101,9 @@ if __name__ == "__main__":
     # Convert the final ranks RDD to a DataFrame
     ranks_df = ranks.toDF(["URL", "Rank"])
 
-    # Define the GCS bucket path where results will be saved
-    bucket_path = "gs://tp_scale_data_m2/out/"
+    # Try to get PATH_BUCKET from Spark config first, then fall back to os.getenv
+    bucket_path = spark.conf.get("spark.executorEnv.PATH_BUCKET", os.getenv("PATH_BUCKET"))
+    bucket_path = os.path.join(bucket_path, "out/")
 
     # Save the DataFrame to GCS as a CSV file
     ranks_df.write.mode("overwrite").csv(bucket_path)

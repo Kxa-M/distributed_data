@@ -6,11 +6,12 @@
 ## en dataproc...
 
 ## copy data
-gsutil cp gs://public_lddm_data/small_page_links.nt $PATH_BUCKET
-gsutil cp gs://public_lddm_data/page_links_en.nt.bz2 $PATH_BUCKET
+# gsutil cp gs://public_lddm_data/small_page_links.nt $PATH_BUCKET
+# gsutil cp gs://public_lddm_data/page_links_en.nt.bz2 $PATH_BUCKET
 
 ## copy pig code
 gsutil cp pagerank-df.py $PATH_BUCKET
+
 
 ## Clean out directory
 gsutil rm -rf $PATH_BUCKET/out
@@ -23,7 +24,7 @@ gcloud dataproc clusters create cluster-a35a --enable-component-gateway --region
 
 ## run
 ## (suppose that out directory is empty !!)
-gcloud dataproc jobs submit pyspark --region europe-west1 --cluster cluster-a35a $PATH_BUCKET/pagerank-df.py  -- $PATH_BUCKET/small_page_links.nt 3
+gcloud dataproc jobs submit pyspark --region europe-west1 --cluster cluster-a35a --properties=spark.executorEnv.PATH_BUCKET=$PATH_BUCKET,spark.driverEnv.PATH_BUCKET=$PATH_BUCKET $PATH_BUCKET/pagerank-df.py -- $PATH_BUCKET/small_page_links.nt 3
 
 ## access results
 #gsutil cat gs://distributed_data/out/pagerank_data_10/part-r-00000

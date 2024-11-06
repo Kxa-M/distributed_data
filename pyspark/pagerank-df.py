@@ -16,6 +16,8 @@ from pyspark.resultiterable import ResultIterable
 from pyspark.sql import SparkSession
 
 
+import os
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: pagerank <file> <iterations>", file=sys.stderr)
@@ -113,6 +115,18 @@ if __name__ == "__main__":
     pagerank.select("page", "pagerank").show()
     fin = time.time()
     print(f"Temps d'exécution : {fin-debut} secondes")
+
+
+    # Convert the final ranks RDD to a DataFrame
+    ranks_df = pagerank.select("page", "pagerank").toDF("page", "pagerank")
+
+    # Try to get PATH_BUCKET from Spark config first, then fall back to os.getenv
+    bucket_path = spark.conf.get("spark.executorEnv.PATH_BUCKET", os.getenv("PATH_BUCKET"))
+    bucket_path = os.path.join(bucket_path, "out/")
+
+    # Save the DataFrame to GCS as a CSV file
+    ranks_df.write.mode("overwrite").csv(bucket_path)
+
     # Arrêtez la session Spark
     spark.stop()
 
