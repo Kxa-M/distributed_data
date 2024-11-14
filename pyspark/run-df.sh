@@ -11,7 +11,7 @@
 
 
 
-#$1 links file  | $2 name cluster | $3 number workers | $4 number of iterations
+#$1 links file  | $2 name cluster | $3 number workers | $4 number of iterations | $5 boolean to enable partitionner
 
 
 ## copy pig code
