@@ -19,10 +19,6 @@ from pyspark.sql import SparkSession
 import os
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: pagerank <file> <iterations>", file=sys.stderr)
-        sys.exit(-1)
-
     findspark.init()
 
     # Créez une session Spark
@@ -52,7 +48,7 @@ if __name__ == "__main__":
     outdegrees = data.groupBy("source").count().withColumnRenamed("source", "page").withColumnRenamed("count", "outDegree")
 
     # Définissez le nombre d'itérations pour le calcul du PageRank
-    max_iterations = 3
+    max_iterations = int(sys.argv[2])
     damping_factor = 0.85
 
     # Initialisation du PageRank en attribuant à chaque page une valeur de départ
@@ -91,7 +87,6 @@ if __name__ == "__main__":
 
     """
 
-    max_iterations = 10
     debut = time.time()
 
     # Effectuez des itérations pour calculer le PageRank

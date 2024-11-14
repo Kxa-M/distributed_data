@@ -7,7 +7,7 @@
 
 ## copy data
 
-#$1 links file  | $2 name cluster | $3 number workers | $4 number of iterations
+#$1 links file  | $2 name cluster | $3 number workers | $4 number of iterations | $5 partitionBy
 
 gsutil cp $1 $PATH_BUCKET/
 
@@ -25,7 +25,7 @@ gcloud dataproc clusters create $2 --enable-component-gateway --region europe-we
 
 ## run
 ## (suppose that out directory is empty !!)
-gcloud dataproc jobs submit pyspark --region europe-west1 --cluster $2 --properties=spark.executorEnv.PATH_BUCKET=$PATH_BUCKET,spark.driverEnv.PATH_BUCKET=$PATH_BUCKET $PATH_BUCKET/pagerank-notype.py  -- $PATH_BUCKET/$1 $4 $2
+gcloud dataproc jobs submit pyspark --region europe-west1 --cluster $2 --properties=spark.executorEnv.PATH_BUCKET=$PATH_BUCKET,spark.driverEnv.PATH_BUCKET=$PATH_BUCKET $PATH_BUCKET/pagerank-notype.py  -- $PATH_BUCKET/$1 $4 $2 $5
 
 ## access results
 #gsutil cat gs://tp_scale_data_m2/out/part-r-00000

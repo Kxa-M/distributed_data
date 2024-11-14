@@ -55,6 +55,7 @@ if __name__ == "__main__":
           "Please refer to PageRank implementation provided by graphx",
           file=sys.stderr)
 
+    partitionBy = sys.argv[4].lower() == "true"
     # Initialize the spark context.
     spark = SparkSession\
         .builder\
@@ -73,12 +74,18 @@ if __name__ == "__main__":
     # Load input file
     lines = spark.read.text(sys.argv[1]).rdd.map(lambda r: r[0])
 
+    if partitionBy : 
     # Initialize `links` with a partitioner and cache it
-    links = lines.map(lambda urls: parseNeighbors(urls)).distinct().groupByKey().partitionBy(num_partitions).cache()
+        links = lines.map(lambda urls: parseNeighbors(urls)).distinct().groupByKey().partitionBy(num_partitions).cache()
 
-    # Initialize ranks and partition it
-    ranks = links.map(lambda url_neighbors: (url_neighbors[0], 1.0)).partitionBy(num_partitions)
+        # Initialize ranks and partition it
+        ranks = links.map(lambda url_neighbors: (url_neighbors[0], 1.0)).partitionBy(num_partitions)
+    else : 
+        links = lines.map(lambda urls: parseNeighbors(urls)).distinct().groupByKey().cache()
 
+        # Initialize ranks and partition it
+        ranks = links.map(lambda url_neighbors: (url_neighbors[0], 1.0))
+          
 
     # Calculates and updates URL ranks continuously using PageRank algorithm.
     for iteration in range(int(sys.argv[2])):
