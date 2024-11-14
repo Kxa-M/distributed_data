@@ -50,9 +50,6 @@ def parseNeighbors(urls) :
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: pagerank <file> <iterations>", file=sys.stderr)
-        sys.exit(-1)
 
     print("WARN: This is a naive implementation of PageRank and is given as an example!\n" +
           "Please refer to PageRank implementation provided by graphx",
@@ -95,15 +92,15 @@ if __name__ == "__main__":
 
 
     # Collect results
-    for (link, rank) in ranks.collect():
-        print("%s has rank: %s." % (link, rank))
+    #for (link, rank) in ranks.collect():
+    #    print("%s has rank: %s." % (link, rank))
 
     # Convert the final ranks RDD to a DataFrame
     ranks_df = ranks.toDF(["URL", "Rank"])
 
     # Try to get PATH_BUCKET from Spark config first, then fall back to os.getenv
     bucket_path = spark.conf.get("spark.executorEnv.PATH_BUCKET", os.getenv("PATH_BUCKET"))
-    bucket_path = os.path.join(bucket_path, "out/")
+    bucket_path = os.path.join(bucket_path, "out/" + sys.argv[3]+ "/")
 
     # Save the DataFrame to GCS as a CSV file
     ranks_df.write.mode("overwrite").csv(bucket_path)
