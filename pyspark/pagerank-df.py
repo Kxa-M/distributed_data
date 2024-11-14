@@ -13,12 +13,20 @@ from operator import add
 from typing import Iterable, Tuple
 
 from pyspark.resultiterable import ResultIterable
-from pyspark.sql import SparkSession
+
+from pyspark.sql import Window
+from pyspark.sql.functions import sum as sql_sum
 
 
 import os
 
 if __name__ == "__main__":
+    partitionBy = sys.argv[4].lower() == "true"
+
+    # Helper function to conditionally apply partitioning
+    def apply_partitioning(df, column_name):
+        return df.repartition(column_name) if partitionBy else df
+
     findspark.init()
 
     # Créez une session Spark
@@ -46,6 +54,7 @@ if __name__ == "__main__":
 
     # Créez un DataFrame contenant le nombre de liens sortants pour chaque page
     outdegrees = data.groupBy("source").count().withColumnRenamed("source", "page").withColumnRenamed("count", "outDegree")
+    outdegrees = apply_partitioning(outdegrees, "page")
 
     # Définissez le nombre d'itérations pour le calcul du PageRank
     max_iterations = int(sys.argv[2])
@@ -56,6 +65,7 @@ if __name__ == "__main__":
 
     # Créez un DataFrame contenant les valeurs de PageRank initiales
     pagerank = outdegrees.withColumn("pagerank", col("outDegree") / initial_pagerank)
+    pagerank = apply_partitioning(pagerank, "page")
 
     pagerank.show(5,truncate=100)
 
@@ -87,22 +97,29 @@ if __name__ == "__main__":
 
     """
 
+    # Define window for partitioned computation
+    window_spec = Window.partitionBy("source") if partitionBy else None
+
     debut = time.time()
 
     # Effectuez des itérations pour calculer le PageRank
+
+
 
     for iteration in range(max_iterations):
     # Rejoignez le DataFrame pagerank avec le DataFrame data pour calculer la contribution à partir des liens entrants
         contrib = data.join(pagerank, data.target == pagerank.page, "left").select("source", "pagerank")
 
-        new_pagerank = contrib.groupBy("source").sum("pagerank").withColumnRenamed("source", "page").withColumnRenamed("sum(pagerank)", "pagerank")
+        new_pagerank = contrib.groupBy("source").agg(sql_sum("pagerank").alias("pagerank")).withColumnRenamed("source", "page")
+        
+        new_pagerank = apply_partitioning(new_pagerank, "page")
 
         # Joignez le DataFrame "new_pagerank" avec le DataFrame "outdegrees" pour obtenir les "outDegree" appropriés
-        pagerank = new_pagerank.join(outdegrees, new_pagerank.page == outdegrees.page, "left").select(new_pagerank.page, new_pagerank.pagerank, outdegrees.outDegree)
+        pagerank = new_pagerank.join(outdegrees, new_pagerank.page == outdegrees.page, "left").select(new_pagerank.page, new_pagerank.pagerank, outdegrees.outDegree).withColumn("pagerank", (1 - damping_factor) + damping_factor * col("pagerank") / col("outDegree"))
 
-        # Appliquez la formule du PageRank
-        pagerank = pagerank.withColumn("pagerank", (1 - damping_factor) + damping_factor * col("pagerank") / col("outDegree"))
+        pagerank = apply_partitioning(pagerank, "page")
 
+        # Appliquez la formule du PageRankp
         print(pagerank)
 
 
