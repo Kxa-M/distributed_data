@@ -10,4 +10,5 @@
 | [ArgumentForms](http://dbpedia.org/resource/ArgumentForms)                                | 0.2825 |
 | [Algorithms](http://dbpedia.org/resource/Algorithms)                                   | 0.2824 |
 
-![VM Instance - Memory usage  SUM](https://github.com/user-attachments/assets/f6338759-4212-4a34-9ae5-dc51952778c8)
+
+![monitoring](https://github.com/user-attachments/assets/0b3d855b-4d8d-447f-b445-4899350dbc5c)
