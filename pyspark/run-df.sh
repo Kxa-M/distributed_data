@@ -15,12 +15,12 @@
 
 
 ## copy pig code
-gsutil cp $1 $PATH_BUCKET
+gsutil cp $1 $PATH_BUCKET/
+gsutil cp pagerank-df.py $PATH_BUCKET/
 
 
 ## Clean out directory
 gsutil rm -rf $PATH_BUCKET/out/$2
-gsutil rm -rf gs://small_page_links/out
 
 
 ## create the cluster
