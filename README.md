@@ -24,7 +24,7 @@
 | [List_of_sovereign_states](http://dbpedia.org/resource/List_of_sovereign_states)                          | 5195.347361862181    |
 | [United_Kingdom](http://dbpedia.org/resource/United_Kingdom)                                              | 4923.82130931521     |
 
-## DF with URL partitionner cluster-df-partition-2w
+## cluster-df-partition-2w
 
 | Link                                                                                                   | PageRank Score    |
 |--------------------------------------------------------------------------------------------------------|-------------------|  
