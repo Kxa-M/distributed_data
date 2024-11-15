@@ -84,8 +84,11 @@
 |   df-no-partition-0w     | 58mins |
 
 
-
+# Analyse Réseau et disque
+### Comme on peut le voir ci-dessous, le partitionnement des données entraîne une utilisation accrue du réseau pour l'échange d'informations entre noeuds avec peu d'utilisation du disque. Tandis qu'en RDD et sans partition on a de grands échanges sur le disque
+Réseau: 
 ![network](https://github.com/user-attachments/assets/e1d11e5e-eb1e-4d1b-a555-ab7199778573)
+Disque: 
 ![disk](https://github.com/user-attachments/assets/19ece3d8-12e5-4078-aedf-e75fb842696e)
 
 
