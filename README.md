@@ -34,5 +34,18 @@
 | [Bogaras](http://dbpedia.org/resource/Bogaras)                                                         | 319.34832872672814 |
 | [Blazov](http://dbpedia.org/resource/Blazov)                                                           | 283.6398303443939 |
 
+## cluster-notype-partition-0w
+| Link                                                                                                   | PageRank Score    |
+|--------------------------------------------------------------------------------------------------------|-------------------|  
+| [Living_people](http://dbpedia.org/resource/Living_people)                                             | 36794.33146754523 |
+| [United_States](http://dbpedia.org/resource/United_States)                                             | 13201.340151981214 |
+| [Race_and_ethnicity_in_the_United_States_Census](http://dbpedia.org/resource/Race_and_ethnicity_in_the_United_States_Census)  | 10371.162005541351 |
+| [List_of_sovereign_states](http://dbpedia.org/resource/List_of_sovereign_states)                       | 5195.347361862185 |
+| [United_Kingdom](http://dbpedia.org/resource/United_Kingdom)                                           | 4923.821309315204 |
+
+
+
+
+
 
 ![monitoring](https://github.com/user-attachments/assets/0b3d855b-4d8d-447f-b445-4899350dbc5c)
