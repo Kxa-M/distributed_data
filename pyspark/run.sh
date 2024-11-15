@@ -20,7 +20,7 @@ gsutil rm -rf $PATH_BUCKET/out/$2
 
 
 ## create the cluster
-gcloud dataproc clusters create $2 --enable-component-gateway --region europe-west1 --zone europe-west1-c --master-machine-type n1-standard-4 --master-boot-disk-size 500 --num-workers $3 --worker-machine-type n1-standard-4 --worker-boot-disk-size 500 --image-version 2.0-debian10 --project $PROJECT_NAME  --labels=goog-ops-agent-policy=v2-x86-template-1-3-0,goog-ec-src=vm_add-gcloud --reservation-affinity=any
+gcloud dataproc clusters create $2 --enable-component-gateway --region europe-west1 --zone europe-west1-c --master-machine-type custom-8-53248-ext --master-boot-disk-size 500 --num-workers $3 --worker-machine-type n1-standard-4 --worker-boot-disk-size 500 --image-version 2.0-debian10 --project $PROJECT_NAME  --labels=goog-ops-agent-policy=v2-x86-template-1-3-0,goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 
 ## run
