@@ -1,3 +1,6 @@
+Théo Charlot, Nicolas Gouget, Rémi Ilango
+M2 ATAL
+
 # distributed_data
 
 # Top 5 Score Pagerank 
