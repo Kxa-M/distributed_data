@@ -52,8 +52,6 @@
 | [Obornjaca](http://dbpedia.org/resource/Obornjaca)                                         | 333.2843275163721  |
 | [Bogaras](http://dbpedia.org/resource/Bogaras)                                             | 319.34832872672814 |
 | [Blazov](http://dbpedia.org/resource/Blazov)                                               | 283.6398303443939  |
-<http://dbpedia.org/resource/Bogaras>,319.34832872672814
-<http://dbpedia.org/resource/Blazov>,283.63983034439383
 
 
 
