@@ -53,6 +53,4 @@
 | [Bogaras](http://dbpedia.org/resource/Bogaras)                                             | 319.34832872672814 |
 | [Blazov](http://dbpedia.org/resource/Blazov)                                               | 283.6398303443939  |
 
-
-
-![monitoring](https://github.com/user-attachments/assets/0b3d855b-4d8d-447f-b445-4899350dbc5c)
+![cpu](https://github.com/user-attachments/assets/a8c7754b-80e8-49f7-95b4-2c17f77116b4)
