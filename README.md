@@ -44,7 +44,16 @@
 | [United_Kingdom](http://dbpedia.org/resource/United_Kingdom)                                           | 4923.821309315204 |
 
 
-
+## cluster-df-partition-0w
+| Link                                                                                       | PageRank Score     |
+|--------------------------------------------------------------------------------------------|--------------------|
+| [Boksa_%28disambiguation%29](http://dbpedia.org/resource/Boksa_%28disambiguation%29)       | 534.3935469409988  |
+| [Sid_%28disambiguation%29](http://dbpedia.org/resource/Sid_%28disambiguation%29)           | 429.1328876877597  |
+| [Obornjaca](http://dbpedia.org/resource/Obornjaca)                                         | 333.2843275163721  |
+| [Bogaras](http://dbpedia.org/resource/Bogaras)                                             | 319.34832872672814 |
+| [Blazov](http://dbpedia.org/resource/Blazov)                                               | 283.6398303443939  |
+<http://dbpedia.org/resource/Bogaras>,319.34832872672814
+<http://dbpedia.org/resource/Blazov>,283.63983034439383
 
 
 
