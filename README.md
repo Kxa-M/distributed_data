@@ -72,9 +72,13 @@ M2 ATAL
 
 ![cpu](https://github.com/user-attachments/assets/a8c7754b-80e8-49f7-95b4-2c17f77116b4)
 ![cpu2](https://github.com/user-attachments/assets/0cdb3665-d404-4657-81cd-6635efd3ff51)
+
+
 | Approach                                                                                     | Time   |
 |--------------------------------------------------------------------------------------------|--------------------|
 |   rdd-partition-0w     | 52mins |
+|  rdd-partition-2w      | 55mins
+|  rdd-partition-4w      | 47mins |
 |--------------------------------------------------------------------------------------------|--------------------|
 |   rdd-no-partition-0w     | 45mins |
 |   rdd-no-partition-2w     | 49mins |
@@ -85,6 +89,8 @@ M2 ATAL
 |   df-partition-4w     | 33mins |
 |--------------------------------------------------------------------------------------------|--------------------|
 |   df-no-partition-0w     | 58mins |
+|  df-no-partition-2w      | 54mins |
+|  df-no-partition-4w      | 45mins |
 
 
 # Analyse Réseau et disque
